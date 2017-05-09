@@ -19,7 +19,7 @@ $(function () {
             $(&amp;quot;.menu_nav&amp;quot;).">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lmuy' blog">
-<meta property="og:url" content="http://yoursite.com/2017/03/20/一周总结之二/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/一周总结之二（导航固定条-登录滑块）/index.html">
 <meta property="og:site_name" content="Lmuy' blog">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;首先是有关上方导航条固定的，代码如下：
 $(function () {
@@ -27,7 +27,7 @@ $(function () {
         var scrollTop = $(document).scrollTop();
         if(scrollTop &amp;gt;= 145){
             $(&amp;quot;.menu_nav&amp;quot;).">
-<meta property="og:updated_time" content="2017-03-20T07:46:20.306Z">
+<meta property="og:updated_time" content="2017-03-24T08:30:16.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lmuy' blog">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;首先是有关上方导航条固定的，代码如下：
@@ -95,7 +95,7 @@ $(function () {
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/20/一周总结之二/" title="" itemprop="url"></a>
+      <a href="/2017/03/20/一周总结之二（导航固定条-登录滑块）/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
@@ -126,8 +126,71 @@ $(function () {
         }
     });
 });
-</code></pre><p>只需要知道距离窗口上方的位置，算出滑动距离即可。</p>
-  
+</code></pre><p>只需要知道距离窗口上方的位置，算出滑动距离即可。<br><br>&emsp;&emsp;接下来是登录弹窗的滑块部分，代码如下：</p>
+<pre><code>(function($){
+        $.fn.drag = function(options){
+            var x, drag = this, isMove = false, defaults = {
+            };
+            var options = $.extend(defaults, options);
+            //添加背景，文字，滑块
+            var html = &apos;&lt;div class=&quot;drag_bg&quot;&gt;&lt;/div&gt;&apos;+
+                        &apos;&lt;div class=&quot;drag_text&quot; onselectstart=&quot;return false;&quot; unselectable=&quot;on&quot;&gt;拖动滑块验证&lt;/div&gt;&apos;+
+                        &apos;&lt;div class=&quot;handler handler_bg&quot;&gt;&lt;/div&gt;&apos;;
+            $(&quot;#drag&quot;).html(html);
+
+            var handler = drag.find(&apos;.handler&apos;);
+            var drag_bg = drag.find(&apos;.drag_bg&apos;);
+            var text = drag.find(&apos;.drag_text&apos;);
+            var maxWidth = drag.width() - handler.width();  //能滑动的最大间距
+
+            //鼠标按下时候的x轴的位置
+            handler.mousedown(function(e){
+                isMove = true;
+                x = e.pageX - parseInt(handler.css(&apos;left&apos;), 10);
+            });
+
+            //鼠标指针在上下文移动时，移动距离大于0小于最大间距，滑块x轴位置等于鼠标移动距离
+            $(document).mousemove(function(e){
+                var _x = e.pageX - x;
+                if(isMove){
+                    if(_x &gt; 0 &amp;&amp; _x &lt;= 100){
+                        handler.css({&apos;left&apos;: _x});
+                        drag_bg.css({&apos;width&apos;: _x});
+                    }else if(_x&gt;100 &amp;&amp; _x &lt;=maxWidth){
+                        handler.css({&apos;left&apos;: _x});
+                        drag_bg.css({&apos;width&apos;: _x});
+                        text.css(&quot;color&quot;,&quot;transparent&quot;);
+                    }else if(_x &gt; maxWidth){  //鼠标指针移动距离达到最大时清空事件
+                        dragOk();
+                        check_yanzheng=true;
+                    }
+                }
+            }).mouseup(function(e){
+                isMove = false;
+                var _x = e.pageX - x;
+                if(_x &lt; maxWidth){ //鼠标松开时，如果没有达到最大距离位置，滑块就返回初始位置
+                    handler.css({&apos;left&apos;: 0});
+                    drag_bg.css({&apos;width&apos;: 0});
+                    text.css(&quot;color&quot;,&quot;#999999&quot;);
+                }
+            });
+
+            //清空事件
+            function dragOk(){
+                handler.removeClass(&apos;handler_bg&apos;).addClass(&apos;handler_ok_bg&apos;);
+                text.text(&apos;验证通过&apos;);
+                text.css(&apos;color&apos;,&apos;white&apos;);
+                drag.css({&apos;color&apos;: &apos;#fff&apos;});
+                handler.unbind(&apos;mousedown&apos;);
+                $(document).unbind(&apos;mousemove&apos;);
+                $(document).unbind(&apos;mouseup&apos;);
+            }
+        };
+    })(jQuery);  
+
+    $(&apos;#drag&apos;).drag();
+};
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -139,7 +202,7 @@ $(function () {
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/03/20/一周总结之二/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/03/20/一周总结之二（导航固定条-登录滑块）/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -152,9 +215,17 @@ $(function () {
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2017/03/29/一周总结三（分页）/" title="">
+  <strong>上一篇：</strong><br/>
+  <span>
+  (no title)</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2017/03/14/一周总结之一/"  title="">
+<a href="/2017/03/14/一周总结之一(修改密码-登录弹窗)/"  title="">
  <strong>下一篇：</strong><br/> 
  <span>(no title)
 </span>

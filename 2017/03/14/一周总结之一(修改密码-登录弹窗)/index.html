@@ -14,10 +14,10 @@
     <meta name="description" content="&amp;emsp;&amp;emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。&amp;emsp;&amp;emsp;首先是修改密码问题：&amp;emsp;&amp;emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）&amp;emsp;&amp;emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lmuy' blog">
-<meta property="og:url" content="http://yoursite.com/2017/03/14/一周总结（分页和修改密码动态问题）/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/03/14/一周总结之一(修改密码-登录弹窗)/index.html">
 <meta property="og:site_name" content="Lmuy' blog">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。&amp;emsp;&amp;emsp;首先是修改密码问题：&amp;emsp;&amp;emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）&amp;emsp;&amp;emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交">
-<meta property="og:updated_time" content="2017-03-16T08:51:17.404Z">
+<meta property="og:updated_time" content="2017-03-29T06:55:47.004Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lmuy' blog">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。&amp;emsp;&amp;emsp;首先是修改密码问题：&amp;emsp;&amp;emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）&amp;emsp;&amp;emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交">
@@ -80,7 +80,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/14/一周总结（分页和修改密码动态问题）/" title="" itemprop="url"></a>
+      <a href="/2017/03/14/一周总结之一(修改密码-登录弹窗)/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
@@ -134,7 +134,7 @@ if(($(&quot;#newpasswordverify&quot;).val()) == &quot;&quot; || ($(&quot;#newpas
 }else{
     submit_formdata($(&quot;#newpasswordverify&quot;).val());
 }
-</code></pre><p>}<br><br><br>&emsp;&emsp;还有一个登陆弹窗的问题，只需要在需要点击登录的页面最下方引入登录界面的登陆div，并设置好样式加隐藏，需要登陆的时候用js让其显示即可，一般有两个div一个为灰色背景一个为登陆弹窗。（<strong>但是登陆弹窗中有一个滑动检测按钮，在之前的js中调用可行，但是引入到主界面时，再调用就没反应了，还未解决！</strong>）<br><br>&emsp;&emsp;另外登陆弹窗主界面显示之后，要点击周围任意地方登陆弹窗即可隐藏效果。代码如下：<br></p>
+</code></pre><p>}<br><br><br>&emsp;&emsp;还有一个登陆弹窗的问题，只需要在需要点击登录的页面最下方引入登录界面的登陆div，并设置好样式加隐藏，需要登陆的时候用js让其显示即可，一般有两个div一个为灰色背景一个为登陆弹窗。（<strong>但是登陆弹窗中有一个滑动检测按钮，在之前的js中调用可行，但是引入到主界面时，再调用就没反应了，还未解决！”这里是因为函数不能被调用，直接在弹窗js中引出滑块函数即可解决！”</strong>）<br><br>&emsp;&emsp;另外登陆弹窗主界面显示之后，要点击周围任意地方登陆弹窗即可隐藏效果。代码如下：<br></p>
 <pre><code>function loginFadeout(e) {
 var drag = $(&quot;#login_pc&quot;),
     dragel = $(&quot;#login_pc&quot;)[0],
@@ -157,7 +157,7 @@ if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/03/14/一周总结（分页和修改密码动态问题）/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/03/14/一周总结之一(修改密码-登录弹窗)/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -171,7 +171,7 @@ if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/03/20/一周总结（二）/" title="">
+ <a href="/2017/03/20/一周总结之二（导航固定条-登录滑块）/" title="">
   <strong>上一篇：</strong><br/>
   <span>
   (no title)</span>

@@ -11,31 +11,40 @@
     
 
     
-    <meta name="description" content="&amp;emsp;&amp;emsp;首先是有关上方导航条固定的，代码如下：
-$(function () {
-    $(window).scroll(function(){
-        var scrollTop = $(document).scrollTop();
-        if(scrollTop &amp;gt;= 145){
-            $(&amp;quot;.menu_nav&amp;quot;).">
+    <meta name="description" content="&amp;emsp;&amp;emsp;上传头像部分之前没做过，现在看到老师写的很好，样式也很美观留下来学习一下，代码如下：
+//选择头像
+function displaySelectHead() {
+init();
+$(&amp;quot;#input&amp;quot;).click();
+
+//    $(&amp;quot;#headPic_change&amp;quot;).hide();
+$(&amp;quot;#headPic_selec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lmuy' blog">
-<meta property="og:url" content="http://yoursite.com/2017/03/20/一周总结（二）/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/04/12/一周总结四（上传头像）/index.html">
 <meta property="og:site_name" content="Lmuy' blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;首先是有关上方导航条固定的，代码如下：
-$(function () {
-    $(window).scroll(function(){
-        var scrollTop = $(document).scrollTop();
-        if(scrollTop &amp;gt;= 145){
-            $(&amp;quot;.menu_nav&amp;quot;).">
-<meta property="og:updated_time" content="2017-03-20T07:46:20.306Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;上传头像部分之前没做过，现在看到老师写的很好，样式也很美观留下来学习一下，代码如下：
+//选择头像
+function displaySelectHead() {
+init();
+$(&amp;quot;#input&amp;quot;).click();
+
+//    $(&amp;quot;#headPic_change&amp;quot;).hide();
+$(&amp;quot;#headPic_selec">
+<meta property="og:image" content="http://i.imgur.com/r6d2CXV.png">
+<meta property="og:image" content="http://i.imgur.com/yMs09ix.png">
+<meta property="og:updated_time" content="2017-04-12T02:51:08.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lmuy' blog">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;首先是有关上方导航条固定的，代码如下：
-$(function () {
-    $(window).scroll(function(){
-        var scrollTop = $(document).scrollTop();
-        if(scrollTop &amp;gt;= 145){
-            $(&amp;quot;.menu_nav&amp;quot;).">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;上传头像部分之前没做过，现在看到老师写的很好，样式也很美观留下来学习一下，代码如下：
+//选择头像
+function displaySelectHead() {
+init();
+$(&amp;quot;#input&amp;quot;).click();
+
+//    $(&amp;quot;#headPic_change&amp;quot;).hide();
+$(&amp;quot;#headPic_selec">
+<meta name="twitter:image" content="http://i.imgur.com/r6d2CXV.png">
 
     
     <link rel="alternative" href="/atom.xml" title="Lmuy&#39; blog" type="application/atom+xml">
@@ -95,14 +104,14 @@ $(function () {
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/20/一周总结（二）/" title="" itemprop="url"></a>
+      <a href="/2017/04/12/一周总结四（上传头像）/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Lmuy" target="_blank" itemprop="author">Lmuy</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-20T07:43:44.014Z" itemprop="datePublished"> 发表于 2017-03-20</time>
+    <time datetime="2017-04-12T02:37:11.026Z" itemprop="datePublished"> 发表于 2017-04-12</time>
     
   </p>
 </header>
@@ -115,18 +124,131 @@ $(function () {
 		
 		</div>
 		
-		<p>&emsp;&emsp;首先是有关上方导航条固定的，代码如下：</p>
-<pre><code>$(function () {
-    $(window).scroll(function(){
-        var scrollTop = $(document).scrollTop();
-        if(scrollTop &gt;= 145){
-            $(&quot;.menu_nav&quot;).addClass(&quot;new_menu&quot;);
-        }else{
-            $(&quot;.menu_nav&quot;).removeClass(&quot;new_menu&quot;);
+		<p>&emsp;&emsp;上传头像部分之前没做过，现在看到老师写的很好，样式也很美观留下来学习一下，代码如下：</p>
+<pre><code>//选择头像
+function displaySelectHead() {
+init();
+$(&quot;#input&quot;).click();
+
+//    $(&quot;#headPic_change&quot;).hide();
+$(&quot;#headPic_select&quot;).hide();
+$(&quot;#headPic_upload&quot;).show();
+}
+
+function init()
+{
+//绑定
+cropper = new ImageCropper(500, 500, 380, 380);
+cropper.setCanvas(&quot;cropper&quot;);
+cropper.addPreview(&quot;preview82&quot;);
+//检测用户浏览器是否支持imagecropper插件
+if(!cropper.isAvaiable())
+{
+    alert(&quot;Sorry, your browser doesn&apos;t support FileReader, please use Firefox3.6+ or Chrome10+ to run it.&quot;);
+}
+}
+//打开本地图片
+function selectImage(fileList)
+{
+    if(fileList.length==1){
+        cropper.loadImage(fileList[0]);
+    }
+
+    fileListLength=fileList.length;
+
+
+}
+
+//上传图片
+function saveImage()
+{
+//WebCenter/User?cmd=save_image&amp;id=1&amp;url=1.img
+//选个你需要的大小
+if(fileListLength!=1){
+    alert(&quot;请选择头像图片！重新上传&quot;);
+    return;
+}
+var imgData = cropper.getCroppedImageData(180, 180);
+var douIndex=imgData.indexOf(&quot;,&quot;);
+var imgUploadData=imgData.substring(douIndex+1);
+console.log(&quot;上传了：&quot;+imgUploadData);
+//todo:上传代码
+$.ajax({
+    type: &apos;post&apos;,
+    url: g_ServerAPI+&apos;Photo&apos;,
+    data: &apos;cmd=upload_user_head&amp;id=&apos;+userID+&apos;&amp;base64=&apos;+imgUploadData,
+    dataType: &quot;text&quot;,
+    async:false,
+    success: function(ret) {            
+        var result = eval(&quot;(&quot; + ret + &quot;)&quot;);
+        if(result.state==1){
+            console.log(&quot;set image success!&quot;);
         }
-    });
+    },
+
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(&quot;set residence error!&quot;);
+    }
 });
-</code></pre><p>只需要知道距离窗口上方的位置，算出滑动距离即可。</p>
+
+var imgUrl=g_ServerAPI+&quot;images/user&quot; + userID + &quot;.jpeg&quot;;
+console.log(imgUrl);
+$.ajax({
+    type: &apos;post&apos;,
+    url: g_ServerAPI+&apos;User&apos;,
+    data: &apos;cmd=save_image&amp;id=&apos;+userID+&apos;&amp;url=&apos;+imgUrl,
+    dataType: &quot;text&quot;,
+    async:false,
+    success: function(ret) {            
+        var result = eval(&quot;(&quot; + ret + &quot;)&quot;);
+        if(result.state==1){
+            console.log(&quot;set image success!&quot;);
+        }
+    },
+
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(&quot;set residence error!&quot;);
+    }
+});
+
+$(&quot;#myOriginalHeadImg&quot;).attr(&quot;src&quot;,imgData);
+//  $(&quot;#headPic_change&quot;).show();
+$(&quot;#headPic_select&quot;).show();
+$(&quot;#headPic_upload&quot;).hide();
+
+$(&quot;#person_center_main_left_headimg&quot;).attr(&quot;src&quot;,imgData);
+}
+</code></pre><p>html代码如下：</p>
+<pre><code>&lt;div class=&quot;person_center_main_right_headPic_select&quot; id=&quot;headPic_select&quot;&gt;
+                &lt;div class=&quot;person_center_main_right_leftword&quot;&gt;
+                    我的头像
+                &lt;/div&gt;
+                &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_headPic&quot; id=&quot;selectHeadPic&quot;&gt;                    
+                    &lt;img id=&quot;myOriginalHeadImg&quot; src=&quot;../images/pc_person_photo_2.png&quot;/&gt;
+                    &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_headPicText&quot;&gt;
+                        支持jpg、png、gif格式，且图片小于5M
+                    &lt;/div&gt;
+                    &lt;button class=&quot;person_center_main_right_persondata_editHeadPic_headPicButton&quot; id=&quot;selectHeadBtn&quot;&gt;上传头像&lt;/button&gt;
+                    &lt;input type=&quot;file&quot; id=&quot;input&quot; size=&quot;10&quot; style=&quot;visibility:hidden;&quot; onchange=&quot;selectImage(this.files)&quot; /&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;person_center_main_right_headPic_upload&quot; id=&quot;headPic_upload&quot;&gt;
+                &lt;div class=&quot;person_center_main_right_leftword&quot;&gt;
+                    我的头像
+                &lt;/div&gt;
+                &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_headPic&quot; id=&quot;uploadHeadPic&quot;&gt;                        
+                    &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_uploadbig&quot;&gt;
+                        &lt;canvas id=&quot;cropper&quot;&gt;&lt;/canvas&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_uploadsmall&quot; id=&quot;previewContainer&quot;&gt;
+                        &lt;canvas id=&quot;preview82&quot; width=&quot;82px&quot; height=&quot;82px&quot;  class=&quot;preview&quot;&gt;&lt;/canvas&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+                    &lt;button class=&quot;person_center_main_right_persondata_editHeadPic_uploadheadPicButton&quot; id=&quot;uploadHeadBtn&quot;&gt;上传头像&lt;/button&gt;
+                    &lt;a id=&quot;reupload&quot;&gt;重新上传&gt;&lt;/a&gt;
+                &lt;/div&gt;                    
+            &lt;/div&gt;
+</code></pre><p>效果如下：<br><img src="http://i.imgur.com/r6d2CXV.png" alt=""><br><img src="http://i.imgur.com/yMs09ix.png" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -139,7 +261,7 @@ $(function () {
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/03/20/一周总结（二）/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/04/12/一周总结四（上传头像）/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -154,7 +276,7 @@ $(function () {
  
 
 <div class="next">
-<a href="/2017/03/14/一周总结（分页和修改密码动态问题）/"  title="">
+<a href="/2017/03/29/一周总结三（分页）/"  title="">
  <strong>下一篇：</strong><br/> 
  <span>(no title)
 </span>
