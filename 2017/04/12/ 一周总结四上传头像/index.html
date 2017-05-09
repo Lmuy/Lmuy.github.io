@@ -11,25 +11,40 @@
     
 
     
-    <meta name="description" content="&amp;emsp;&amp;emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：
-//分页
-function display_personal_center_list_box(){
-    var collectArticlePageCount=1">
+    <meta name="description" content="&amp;emsp;&amp;emsp;上传头像部分之前没做过，现在看到老师写的很好，样式也很美观留下来学习一下，代码如下：
+//选择头像
+function displaySelectHead() {
+init();
+$(&amp;quot;#input&amp;quot;).click();
+
+//    $(&amp;quot;#headPic_change&amp;quot;).hide();
+$(&amp;quot;#headPic_selec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lmuy' blog">
-<meta property="og:url" content="http://yoursite.com/2017/03/29/一周总结三分页/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/04/12/ 一周总结四上传头像/index.html">
 <meta property="og:site_name" content="Lmuy' blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：
-//分页
-function display_personal_center_list_box(){
-    var collectArticlePageCount=1">
-<meta property="og:updated_time" content="2017-03-29T07:06:56.296Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;上传头像部分之前没做过，现在看到老师写的很好，样式也很美观留下来学习一下，代码如下：
+//选择头像
+function displaySelectHead() {
+init();
+$(&amp;quot;#input&amp;quot;).click();
+
+//    $(&amp;quot;#headPic_change&amp;quot;).hide();
+$(&amp;quot;#headPic_selec">
+<meta property="og:image" content="http://i.imgur.com/r6d2CXV.png">
+<meta property="og:image" content="http://i.imgur.com/yMs09ix.png">
+<meta property="og:updated_time" content="2017-04-12T02:51:08.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lmuy' blog">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：
-//分页
-function display_personal_center_list_box(){
-    var collectArticlePageCount=1">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;上传头像部分之前没做过，现在看到老师写的很好，样式也很美观留下来学习一下，代码如下：
+//选择头像
+function displaySelectHead() {
+init();
+$(&amp;quot;#input&amp;quot;).click();
+
+//    $(&amp;quot;#headPic_change&amp;quot;).hide();
+$(&amp;quot;#headPic_selec">
+<meta name="twitter:image" content="http://i.imgur.com/r6d2CXV.png">
 
     
     <link rel="alternative" href="/atom.xml" title="Lmuy&#39; blog" type="application/atom+xml">
@@ -89,14 +104,14 @@ function display_personal_center_list_box(){
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/29/一周总结三分页/" title="" itemprop="url"></a>
+      <a href="/2017/04/12/ 一周总结四上传头像/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Lmuy" target="_blank" itemprop="author">Lmuy</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-29T06:57:31.195Z" itemprop="datePublished"> 发表于 2017-03-29</time>
+    <time datetime="2017-04-12T02:37:11.026Z" itemprop="datePublished"> 发表于 2017-04-12</time>
     
   </p>
 </header>
@@ -109,150 +124,132 @@ function display_personal_center_list_box(){
 		
 		</div>
 		
-		<p>&emsp;&emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：</p>
-<pre><code>//分页
-function display_personal_center_list_box(){
-    var collectArticlePageCount=1;
-    var collectArticleCurrentPage=1;
-$.ajax({  
-    type:&apos;get&apos;,
-    url: g_ServerAPI + &apos;Log&apos;, 
-    data:&apos;cmd=get_collect&amp;type=1&amp;userid=&apos; + userID + &apos;&amp;pageno=0&amp;pagesize=3&apos;,    
-    dataType: &quot;text&quot;, 
-    async: false,
-    success: function (ret) {     
-        $(&quot;#right_collection_article_all&quot;).empty();
-        var articleData = eval(&quot;(&quot; + ret + &quot;)&quot;);
-        var articles = articleData.Articles;
-        var articleList = &quot;&quot;;
-        if(articles.length==0){
-            articleList = &apos;&lt;div style=&quot;margin-top:250px;text-align:center;&quot;&gt;您还没有收藏的文章快去收藏吧！&lt;/div&gt;&apos;;
-            $(&quot;#right_collection_article_all&quot;).append(articleList);
-            $(&quot;#right_collection_course&quot;).append(articleList);
-        }else{
-            for(var i=0;i&lt;articles.length;i++){
-            articleID = articles[i].ID;
-            articleTitle = articles[i].Title;
-            articleAdddate = articles[i].AddDate;
-            articleContent = articles[i].Content;
+		<p>&emsp;&emsp;上传头像部分之前没做过，现在看到老师写的很好，样式也很美观留下来学习一下，代码如下：</p>
+<pre><code>//选择头像
+function displaySelectHead() {
+init();
+$(&quot;#input&quot;).click();
 
-            //下面这种写法不能有空行
-            articleList = &apos;&lt;div onmouseout=&quot;deleteHide(&apos;+i+&apos;)&quot; onmouseover=&quot;deleteShow(&apos;+i+&apos;)&quot; class=&quot;person_center_main_right_collection_article_content&quot; id=&quot;right_collection_article_content&apos;+i+&apos;&quot;&gt;\
-                &lt;img class=&quot;person_center_main_right_collection_article_content_picture&quot; src=&quot;../images/enjoy_list_pic01.png&quot;&gt;\
-                &lt;div class=&quot;person_center_main_right_collection_article_content_article&quot;&gt;\
-                    &lt;a href=&quot;../viewer/index.html?articleID=&apos;+articleID+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_article_title&quot;&gt;&apos; + articleTitle + &apos;&lt;/a&gt;\
-                    &lt;p class=&quot;person_center_main_right_collection_article_content_article_content&quot;&gt;&apos; + articleContent + &apos;&lt;/p&gt;\
-                    &lt;p class=&quot;person_center_main_right_collection_article_content_article_collection&quot;&gt;&apos; + articleAdddate + &apos;&lt;/p&gt;\
-                &lt;/div&gt;\
-                &lt;div style=&quot;display:none;&quot; id=&quot;right_collection_article_content_delete&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_delete&quot; &gt;\
-                    &lt;img onclick=&quot;deleteArticle(&apos;+i+&apos;,&apos;+articleID+&apos;)&quot; src=&quot;../images/person_icon_delete.png&quot; alt=&quot;删除&quot; /&gt;\
-                &lt;/div&gt;\
-            &lt;/div&gt;\
-            &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;&apos;;
-
-
-            if(i&lt;articles.length-1){
-                articleList += &apos;&lt;div id=&quot;right_collection_line&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_line&quot;&gt;&lt;hr/&gt;&lt;/div&gt;&apos;;
-            }else{
-                articleList += &apos;&lt;div&gt;&lt;/div&gt;&apos;;
-            };
-
-
-
-            $(&quot;#right_collection_article_all&quot;).append(articleList);
-
-        };
-
-        collectArticlePageCount = Math.ceil(articleData.total/3); 
-
-        var options = {
-            bootstrapMajorVersion: 2, //版本
-            currentPage: collectArticleCurrentPage, //当前页数
-            totalPages: collectArticlePageCount, //总页数
-            itemTexts: function(type, page, current) {
-                switch(type) {
-                    case &quot;first&quot;:
-                        return &quot;&lt;&quot;;//&amp;laquo;
-                    case &quot;prev&quot;:
-                        return &quot;&lt;&quot;;//&amp;lt;
-                    case &quot;next&quot;:
-                        return &quot;&gt;&quot;;//&amp;gt;
-                    case &quot;last&quot;:
-                        return &quot;&gt;&quot;;//&amp;raquo;
-                    case &quot;page&quot;:
-                        return page;
-                }
-        }, 
-        onPageClicked: function(event, originalEvent, type, page){
-            $.ajax({  
-                type:&apos;get&apos;,
-                url: g_ServerAPI + &apos;Log&apos;, 
-                data:&apos;cmd=get_collect&amp;type=1&amp;userid=&apos; + userID + &apos;&amp;pageno=&apos;+ (page-1) +&apos;&amp;pagesize=3&apos;,    
-                dataType: &quot;text&quot;, 
-                async: false,
-                success: function (ret) {     
-                    $(&quot;#right_collection_article_all&quot;).empty();
-                    var articleData = eval(&quot;(&quot; + ret + &quot;)&quot;);
-                    var articles = articleData.Articles;
-                    var articleList = &quot;&quot;;
-                    if(articles.length==0){
-                        articleList = &apos;&lt;div style=&quot;margin-top:250px;text-align:center;&quot;&gt;您还没有收藏的文章快去收藏吧！&lt;/div&gt;&apos;;
-                        $(&quot;#right_collection_article_all&quot;).append(articleList);
-                        $(&quot;#right_collection_course&quot;).append(articleList);
-                    }else{
-                        for(var i=0;i&lt;articles.length;i++){
-                        articleID = articles[i].ID;
-                        articleTitle = articles[i].Title;
-                        articleAdddate = articles[i].AddDate;
-                        articleContent = articles[i].Content;
-
-                        //下面这种写法不能有空行
-                        articleList = &apos;&lt;div onmouseout=&quot;deleteHide(&apos;+i+&apos;)&quot; onmouseover=&quot;deleteShow(&apos;+i+&apos;)&quot; class=&quot;person_center_main_right_collection_article_content&quot; id=&quot;right_collection_article_content&apos;+i+&apos;&quot;&gt;\
-                            &lt;img class=&quot;person_center_main_right_collection_article_content_picture&quot; src=&quot;../images/enjoy_list_pic01.png&quot;&gt;\
-                            &lt;div class=&quot;person_center_main_right_collection_article_content_article&quot;&gt;\
-                                &lt;a href=&quot;../viewer/index.html?articleID=&apos;+articleID+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_article_title&quot;&gt;&apos; + articleTitle + &apos;&lt;/a&gt;\
-                                &lt;p class=&quot;person_center_main_right_collection_article_content_article_content&quot;&gt;&apos; + articleContent + &apos;&lt;/p&gt;\
-                                &lt;p class=&quot;person_center_main_right_collection_article_content_article_collection&quot;&gt;&apos; + articleAdddate + &apos;&lt;/p&gt;\
-                            &lt;/div&gt;\
-                            &lt;div style=&quot;display:none;&quot; id=&quot;right_collection_article_content_delete&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_delete&quot; &gt;\
-                                &lt;img onclick=&quot;deleteArticle(&apos;+i+&apos;,&apos;+articleID+&apos;)&quot; src=&quot;../images/person_icon_delete.png&quot; alt=&quot;删除&quot; /&gt;\
-                            &lt;/div&gt;\
-                        &lt;/div&gt;\
-                        &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;&apos;;
-
-
-                        if(i&lt;articles.length-1){
-                            articleList += &apos;&lt;div id=&quot;right_collection_line&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_line&quot;&gt;&lt;hr/&gt;&lt;/div&gt;&apos;;
-                        }else{
-                            articleList += &apos;&lt;div&gt;&lt;/div&gt;&apos;;
-                        };
-
-
-
-                        $(&quot;#right_collection_article_all&quot;).append(articleList);
-
-                        }
-                        }
-                    }
-                        });
-                    },
-                    };
-
-                        $(&apos;#right_collection_article_all_page&apos;).bootstrapPaginator(options);
-
-
-                    }
-
-    },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-        console.log(XMLHttpRequest.status);
-        console.log(XMLHttpRequest.readyState);
-        console.log(textStatus);
-}  
-});
+//    $(&quot;#headPic_change&quot;).hide();
+$(&quot;#headPic_select&quot;).hide();
+$(&quot;#headPic_upload&quot;).show();
 }
-</code></pre>  
+
+function init()
+{
+//绑定
+cropper = new ImageCropper(500, 500, 380, 380);
+cropper.setCanvas(&quot;cropper&quot;);
+cropper.addPreview(&quot;preview82&quot;);
+//检测用户浏览器是否支持imagecropper插件
+if(!cropper.isAvaiable())
+{
+    alert(&quot;Sorry, your browser doesn&apos;t support FileReader, please use Firefox3.6+ or Chrome10+ to run it.&quot;);
+}
+}
+//打开本地图片
+function selectImage(fileList)
+{
+    if(fileList.length==1){
+        cropper.loadImage(fileList[0]);
+    }
+
+    fileListLength=fileList.length;
+
+
+}
+
+//上传图片
+function saveImage()
+{
+//WebCenter/User?cmd=save_image&amp;id=1&amp;url=1.img
+//选个你需要的大小
+if(fileListLength!=1){
+    alert(&quot;请选择头像图片！重新上传&quot;);
+    return;
+}
+var imgData = cropper.getCroppedImageData(180, 180);
+var douIndex=imgData.indexOf(&quot;,&quot;);
+var imgUploadData=imgData.substring(douIndex+1);
+console.log(&quot;上传了：&quot;+imgUploadData);
+//todo:上传代码
+$.ajax({
+    type: &apos;post&apos;,
+    url: g_ServerAPI+&apos;Photo&apos;,
+    data: &apos;cmd=upload_user_head&amp;id=&apos;+userID+&apos;&amp;base64=&apos;+imgUploadData,
+    dataType: &quot;text&quot;,
+    async:false,
+    success: function(ret) {            
+        var result = eval(&quot;(&quot; + ret + &quot;)&quot;);
+        if(result.state==1){
+            console.log(&quot;set image success!&quot;);
+        }
+    },
+
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(&quot;set residence error!&quot;);
+    }
+});
+
+var imgUrl=g_ServerAPI+&quot;images/user&quot; + userID + &quot;.jpeg&quot;;
+console.log(imgUrl);
+$.ajax({
+    type: &apos;post&apos;,
+    url: g_ServerAPI+&apos;User&apos;,
+    data: &apos;cmd=save_image&amp;id=&apos;+userID+&apos;&amp;url=&apos;+imgUrl,
+    dataType: &quot;text&quot;,
+    async:false,
+    success: function(ret) {            
+        var result = eval(&quot;(&quot; + ret + &quot;)&quot;);
+        if(result.state==1){
+            console.log(&quot;set image success!&quot;);
+        }
+    },
+
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(&quot;set residence error!&quot;);
+    }
+});
+
+$(&quot;#myOriginalHeadImg&quot;).attr(&quot;src&quot;,imgData);
+//  $(&quot;#headPic_change&quot;).show();
+$(&quot;#headPic_select&quot;).show();
+$(&quot;#headPic_upload&quot;).hide();
+
+$(&quot;#person_center_main_left_headimg&quot;).attr(&quot;src&quot;,imgData);
+}
+</code></pre><p>html代码如下：</p>
+<pre><code>&lt;div class=&quot;person_center_main_right_headPic_select&quot; id=&quot;headPic_select&quot;&gt;
+                &lt;div class=&quot;person_center_main_right_leftword&quot;&gt;
+                    我的头像
+                &lt;/div&gt;
+                &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_headPic&quot; id=&quot;selectHeadPic&quot;&gt;                    
+                    &lt;img id=&quot;myOriginalHeadImg&quot; src=&quot;../images/pc_person_photo_2.png&quot;/&gt;
+                    &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_headPicText&quot;&gt;
+                        支持jpg、png、gif格式，且图片小于5M
+                    &lt;/div&gt;
+                    &lt;button class=&quot;person_center_main_right_persondata_editHeadPic_headPicButton&quot; id=&quot;selectHeadBtn&quot;&gt;上传头像&lt;/button&gt;
+                    &lt;input type=&quot;file&quot; id=&quot;input&quot; size=&quot;10&quot; style=&quot;visibility:hidden;&quot; onchange=&quot;selectImage(this.files)&quot; /&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;person_center_main_right_headPic_upload&quot; id=&quot;headPic_upload&quot;&gt;
+                &lt;div class=&quot;person_center_main_right_leftword&quot;&gt;
+                    我的头像
+                &lt;/div&gt;
+                &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_headPic&quot; id=&quot;uploadHeadPic&quot;&gt;                        
+                    &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_uploadbig&quot;&gt;
+                        &lt;canvas id=&quot;cropper&quot;&gt;&lt;/canvas&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;person_center_main_right_persondata_editHeadPic_uploadsmall&quot; id=&quot;previewContainer&quot;&gt;
+                        &lt;canvas id=&quot;preview82&quot; width=&quot;82px&quot; height=&quot;82px&quot;  class=&quot;preview&quot;&gt;&lt;/canvas&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+                    &lt;button class=&quot;person_center_main_right_persondata_editHeadPic_uploadheadPicButton&quot; id=&quot;uploadHeadBtn&quot;&gt;上传头像&lt;/button&gt;
+                    &lt;a id=&quot;reupload&quot;&gt;重新上传&gt;&lt;/a&gt;
+                &lt;/div&gt;                    
+            &lt;/div&gt;
+</code></pre><p>效果如下：<br><img src="http://i.imgur.com/r6d2CXV.png" alt=""><br><img src="http://i.imgur.com/yMs09ix.png" alt=""></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -264,7 +261,7 @@ $.ajax({
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/03/29/一周总结三分页/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/04/12/ 一周总结四上传头像/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -277,17 +274,9 @@ $.ajax({
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/04/12/一周总结四上传头像/" title="">
-  <strong>上一篇：</strong><br/>
-  <span>
-  (no title)</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/03/20/一周总结之二导航固定条-登录滑块/"  title="">
+<a href="/2017/03/29/ 一周总结三分页/"  title="">
  <strong>下一篇：</strong><br/> 
  <span>(no title)
 </span>

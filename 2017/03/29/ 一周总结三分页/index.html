@@ -11,16 +11,25 @@
     
 
     
-    <meta name="description" content="&amp;emsp;&amp;emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。&amp;emsp;&amp;emsp;首先是修改密码问题：&amp;emsp;&amp;emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）&amp;emsp;&amp;emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交">
+    <meta name="description" content="&amp;emsp;&amp;emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：
+//分页
+function display_personal_center_list_box(){
+    var collectArticlePageCount=1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lmuy' blog">
-<meta property="og:url" content="http://yoursite.com/2017/03/14/一周总结之一修改密码-登录弹窗/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/03/29/ 一周总结三分页/index.html">
 <meta property="og:site_name" content="Lmuy' blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。&amp;emsp;&amp;emsp;首先是修改密码问题：&amp;emsp;&amp;emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）&amp;emsp;&amp;emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交">
-<meta property="og:updated_time" content="2017-03-29T06:55:47.004Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：
+//分页
+function display_personal_center_list_box(){
+    var collectArticlePageCount=1">
+<meta property="og:updated_time" content="2017-03-29T07:06:56.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lmuy' blog">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。&amp;emsp;&amp;emsp;首先是修改密码问题：&amp;emsp;&amp;emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）&amp;emsp;&amp;emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：
+//分页
+function display_personal_center_list_box(){
+    var collectArticlePageCount=1">
 
     
     <link rel="alternative" href="/atom.xml" title="Lmuy&#39; blog" type="application/atom+xml">
@@ -80,14 +89,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/14/一周总结之一修改密码-登录弹窗/" title="" itemprop="url"></a>
+      <a href="/2017/03/29/ 一周总结三分页/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Lmuy" target="_blank" itemprop="author">Lmuy</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-14T00:54:29.706Z" itemprop="datePublished"> 发表于 2017-03-14</time>
+    <time datetime="2017-03-29T06:57:31.195Z" itemprop="datePublished"> 发表于 2017-03-29</time>
     
   </p>
 </header>
@@ -100,51 +109,149 @@
 		
 		</div>
 		
-		<p>&emsp;&emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。<br><br>&emsp;&emsp;首先是修改密码问题：<br>&emsp;&emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）<br><br>&emsp;&emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交，在html页面传送数据给js页然后再提交，提交的时候也需要判定），代码如下：<br><br><br></p>
-<p>function submit_formdata(password) {</p>
-<pre><code>$.ajax({
-    type: &apos;post&apos;,
-    url: g_ServerAPI + &apos;User&apos;,
-    data: &apos;cmd=update&amp;password=&apos; + password + &apos;&amp;oldpassword=654321&apos;,
-    dataType: &quot;text&quot;,
-    async:false,
-    success:function(data, status) {
-        if(status == &quot;success&quot;) {
-            var data = eval(&apos;(&apos; + data + &apos;)&apos;);
-            if(data.state == 1 &amp;&amp; ($(&quot;#newpassword&quot;).val()) === ($(&quot;#newpasswordverify&quot;).val())) {
-                alert(&quot;更改成功&quot;);
-                window.location.href = &quot;../home/login.html&quot;;
-            } else {
-                alert(&quot;更改失败，请重新更改&quot;);
-            }
-        } else {
-            alert(&quot;更改失败，请重新更改&quot;);
-        }
-    }
-    });
-</code></pre><p>}<br><br></p>
-<p>//表单提交函数 整个表单提交的有效性检查和数据提交</p>
-<pre><code>function submitUserPassword() {
+		<p>&emsp;&emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：</p>
+<pre><code>//分页
+function display_personal_center_list_box(){
+    var collectArticlePageCount=1;
+    var collectArticleCurrentPage=1;
+$.ajax({  
+    type:&apos;get&apos;,
+    url: g_ServerAPI + &apos;Log&apos;, 
+    data:&apos;cmd=get_collect&amp;type=1&amp;userid=&apos; + userID + &apos;&amp;pageno=0&amp;pagesize=3&apos;,    
+    dataType: &quot;text&quot;, 
+    async: false,
+    success: function (ret) {     
+        $(&quot;#right_collection_article_all&quot;).empty();
+        var articleData = eval(&quot;(&quot; + ret + &quot;)&quot;);
+        var articles = articleData.Articles;
+        var articleList = &quot;&quot;;
+        if(articles.length==0){
+            articleList = &apos;&lt;div style=&quot;margin-top:250px;text-align:center;&quot;&gt;您还没有收藏的文章快去收藏吧！&lt;/div&gt;&apos;;
+            $(&quot;#right_collection_article_all&quot;).append(articleList);
+            $(&quot;#right_collection_course&quot;).append(articleList);
+        }else{
+            for(var i=0;i&lt;articles.length;i++){
+            articleID = articles[i].ID;
+            articleTitle = articles[i].Title;
+            articleAdddate = articles[i].AddDate;
+            articleContent = articles[i].Content;
 
-if(($(&quot;#newpasswordverify&quot;).val()) == &quot;&quot; || ($(&quot;#newpassword&quot;).val()) == &quot;&quot; || ($(&quot;#oldpassword&quot;).val()) == &quot;&quot;) {
+            //下面这种写法不能有空行
+            articleList = &apos;&lt;div onmouseout=&quot;deleteHide(&apos;+i+&apos;)&quot; onmouseover=&quot;deleteShow(&apos;+i+&apos;)&quot; class=&quot;person_center_main_right_collection_article_content&quot; id=&quot;right_collection_article_content&apos;+i+&apos;&quot;&gt;\
+                &lt;img class=&quot;person_center_main_right_collection_article_content_picture&quot; src=&quot;../images/enjoy_list_pic01.png&quot;&gt;\
+                &lt;div class=&quot;person_center_main_right_collection_article_content_article&quot;&gt;\
+                    &lt;a href=&quot;../viewer/index.html?articleID=&apos;+articleID+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_article_title&quot;&gt;&apos; + articleTitle + &apos;&lt;/a&gt;\
+                    &lt;p class=&quot;person_center_main_right_collection_article_content_article_content&quot;&gt;&apos; + articleContent + &apos;&lt;/p&gt;\
+                    &lt;p class=&quot;person_center_main_right_collection_article_content_article_collection&quot;&gt;&apos; + articleAdddate + &apos;&lt;/p&gt;\
+                &lt;/div&gt;\
+                &lt;div style=&quot;display:none;&quot; id=&quot;right_collection_article_content_delete&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_delete&quot; &gt;\
+                    &lt;img onclick=&quot;deleteArticle(&apos;+i+&apos;,&apos;+articleID+&apos;)&quot; src=&quot;../images/person_icon_delete.png&quot; alt=&quot;删除&quot; /&gt;\
+                &lt;/div&gt;\
+            &lt;/div&gt;\
+            &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;&apos;;
 
-    alert(&quot;请输入密码&quot;);
-}else if(($(&quot;#newpassword&quot;).val()) !== ($(&quot;#newpasswordverify&quot;).val())){
-    alert(&quot;请输入正确的密码&quot;);
-}else{
-    submit_formdata($(&quot;#newpasswordverify&quot;).val());
+
+            if(i&lt;articles.length-1){
+                articleList += &apos;&lt;div id=&quot;right_collection_line&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_line&quot;&gt;&lt;hr/&gt;&lt;/div&gt;&apos;;
+            }else{
+                articleList += &apos;&lt;div&gt;&lt;/div&gt;&apos;;
+            };
+
+
+
+            $(&quot;#right_collection_article_all&quot;).append(articleList);
+
+        };
+
+        collectArticlePageCount = Math.ceil(articleData.total/3); 
+
+        var options = {
+            bootstrapMajorVersion: 2, //版本
+            currentPage: collectArticleCurrentPage, //当前页数
+            totalPages: collectArticlePageCount, //总页数
+            itemTexts: function(type, page, current) {
+                switch(type) {
+                    case &quot;first&quot;:
+                        return &quot;&lt;&quot;;//&amp;laquo;
+                    case &quot;prev&quot;:
+                        return &quot;&lt;&quot;;//&amp;lt;
+                    case &quot;next&quot;:
+                        return &quot;&gt;&quot;;//&amp;gt;
+                    case &quot;last&quot;:
+                        return &quot;&gt;&quot;;//&amp;raquo;
+                    case &quot;page&quot;:
+                        return page;
+                }
+        }, 
+        onPageClicked: function(event, originalEvent, type, page){
+            $.ajax({  
+                type:&apos;get&apos;,
+                url: g_ServerAPI + &apos;Log&apos;, 
+                data:&apos;cmd=get_collect&amp;type=1&amp;userid=&apos; + userID + &apos;&amp;pageno=&apos;+ (page-1) +&apos;&amp;pagesize=3&apos;,    
+                dataType: &quot;text&quot;, 
+                async: false,
+                success: function (ret) {     
+                    $(&quot;#right_collection_article_all&quot;).empty();
+                    var articleData = eval(&quot;(&quot; + ret + &quot;)&quot;);
+                    var articles = articleData.Articles;
+                    var articleList = &quot;&quot;;
+                    if(articles.length==0){
+                        articleList = &apos;&lt;div style=&quot;margin-top:250px;text-align:center;&quot;&gt;您还没有收藏的文章快去收藏吧！&lt;/div&gt;&apos;;
+                        $(&quot;#right_collection_article_all&quot;).append(articleList);
+                        $(&quot;#right_collection_course&quot;).append(articleList);
+                    }else{
+                        for(var i=0;i&lt;articles.length;i++){
+                        articleID = articles[i].ID;
+                        articleTitle = articles[i].Title;
+                        articleAdddate = articles[i].AddDate;
+                        articleContent = articles[i].Content;
+
+                        //下面这种写法不能有空行
+                        articleList = &apos;&lt;div onmouseout=&quot;deleteHide(&apos;+i+&apos;)&quot; onmouseover=&quot;deleteShow(&apos;+i+&apos;)&quot; class=&quot;person_center_main_right_collection_article_content&quot; id=&quot;right_collection_article_content&apos;+i+&apos;&quot;&gt;\
+                            &lt;img class=&quot;person_center_main_right_collection_article_content_picture&quot; src=&quot;../images/enjoy_list_pic01.png&quot;&gt;\
+                            &lt;div class=&quot;person_center_main_right_collection_article_content_article&quot;&gt;\
+                                &lt;a href=&quot;../viewer/index.html?articleID=&apos;+articleID+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_article_title&quot;&gt;&apos; + articleTitle + &apos;&lt;/a&gt;\
+                                &lt;p class=&quot;person_center_main_right_collection_article_content_article_content&quot;&gt;&apos; + articleContent + &apos;&lt;/p&gt;\
+                                &lt;p class=&quot;person_center_main_right_collection_article_content_article_collection&quot;&gt;&apos; + articleAdddate + &apos;&lt;/p&gt;\
+                            &lt;/div&gt;\
+                            &lt;div style=&quot;display:none;&quot; id=&quot;right_collection_article_content_delete&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_delete&quot; &gt;\
+                                &lt;img onclick=&quot;deleteArticle(&apos;+i+&apos;,&apos;+articleID+&apos;)&quot; src=&quot;../images/person_icon_delete.png&quot; alt=&quot;删除&quot; /&gt;\
+                            &lt;/div&gt;\
+                        &lt;/div&gt;\
+                        &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;&apos;;
+
+
+                        if(i&lt;articles.length-1){
+                            articleList += &apos;&lt;div id=&quot;right_collection_line&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_line&quot;&gt;&lt;hr/&gt;&lt;/div&gt;&apos;;
+                        }else{
+                            articleList += &apos;&lt;div&gt;&lt;/div&gt;&apos;;
+                        };
+
+
+
+                        $(&quot;#right_collection_article_all&quot;).append(articleList);
+
+                        }
+                        }
+                    }
+                        });
+                    },
+                    };
+
+                        $(&apos;#right_collection_article_all_page&apos;).bootstrapPaginator(options);
+
+
+                    }
+
+    },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+        console.log(XMLHttpRequest.status);
+        console.log(XMLHttpRequest.readyState);
+        console.log(textStatus);
+}  
+});
 }
-</code></pre><p>}<br><br><br>&emsp;&emsp;还有一个登陆弹窗的问题，只需要在需要点击登录的页面最下方引入登录界面的登陆div，并设置好样式加隐藏，需要登陆的时候用js让其显示即可，一般有两个div一个为灰色背景一个为登陆弹窗。（<strong>但是登陆弹窗中有一个滑动检测按钮，在之前的js中调用可行，但是引入到主界面时，再调用就没反应了，还未解决！”这里是因为函数不能被调用，直接在弹窗js中引出滑块函数即可解决！”</strong>）<br><br>&emsp;&emsp;另外登陆弹窗主界面显示之后，要点击周围任意地方登陆弹窗即可隐藏效果。代码如下：<br></p>
-<pre><code>function loginFadeout(e) {
-var drag = $(&quot;#login_pc&quot;),
-    dragel = $(&quot;#login_pc&quot;)[0],
-    target = e.target;
-if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
-    $(&quot;#login_mask&quot;).fadeOut(100);
-    $(&quot;#login_pc&quot;).fadeOut(300);
-}
-
-};//主要问题是可以点击周围但是不能点击弹窗内容部分。
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -157,7 +264,7 @@ if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/03/14/一周总结之一修改密码-登录弹窗/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/03/29/ 一周总结三分页/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -171,7 +278,7 @@ if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/03/20/一周总结之二导航固定条-登录滑块/" title="">
+ <a href="/2017/04/12/ 一周总结四上传头像/" title="">
   <strong>上一篇：</strong><br/>
   <span>
   (no title)</span>
@@ -180,9 +287,9 @@ if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
 
 
 <div class="next">
-<a href="/2017/03/07/一名普通应届大学生的前端求职历程/"  title="一名普通应届大学生的前端求职历程">
+<a href="/2017/03/20/ 一周总结之二导航固定条-登录滑块/"  title="">
  <strong>下一篇：</strong><br/> 
- <span>一名普通应届大学生的前端求职历程
+ <span>(no title)
 </span>
 </a>
 </div>
