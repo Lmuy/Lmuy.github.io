@@ -78,14 +78,14 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/12/ 一周总结四上传头像/" title="" itemprop="url"></a>
+      <a href="/2017/04/12/ 一周总结四上传头像/" title="一周总结四上传头像" itemprop="url">一周总结四上传头像</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Lmuy" target="_blank" itemprop="author">Lmuy</a>
 		
   <p class="article-time">
-    <time datetime="2017-04-12T02:37:11.026Z" itemprop="datePublished"> 发表于 2017-04-12</time>
+    <time datetime="2017-04-12T07:00:01.000Z" itemprop="datePublished"> 发表于 2017-04-12</time>
     
   </p>
 </header>
@@ -252,14 +252,14 @@ $(&quot;#person_center_main_left_headimg&quot;).attr(&quot;src&quot;,imgData);
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/29/ 一周总结三分页/" title="" itemprop="url"></a>
+      <a href="/2017/03/29/ 一周总结三分页/" title="一周总结三分页" itemprop="url">一周总结三分页</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Lmuy" target="_blank" itemprop="author">Lmuy</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-29T06:57:31.195Z" itemprop="datePublished"> 发表于 2017-03-29</time>
+    <time datetime="2017-03-29T07:00:01.000Z" itemprop="datePublished"> 发表于 2017-03-29</time>
     
   </p>
 </header>
@@ -444,14 +444,108 @@ $.ajax({
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/20/ 一周总结之二导航固定条-登录滑块/" title="" itemprop="url"></a>
+      <a href="/2017/03/29/ 一周总结之一修改密码-登录弹窗/" title="一周总结之一修改密码-登录弹窗" itemprop="url">一周总结之一修改密码-登录弹窗</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Lmuy" target="_blank" itemprop="author">Lmuy</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-20T07:43:44.014Z" itemprop="datePublished"> 发表于 2017-03-20</time>
+    <time datetime="2017-03-29T07:00:01.000Z" itemprop="datePublished"> 发表于 2017-03-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>&emsp;&emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。<br><br>&emsp;&emsp;首先是修改密码问题：<br>&emsp;&emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）<br><br>&emsp;&emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交，在html页面传送数据给js页然后再提交，提交的时候也需要判定），代码如下：<br><br><br></p>
+<p>function submit_formdata(password) {</p>
+<pre><code>$.ajax({
+    type: &apos;post&apos;,
+    url: g_ServerAPI + &apos;User&apos;,
+    data: &apos;cmd=update&amp;password=&apos; + password + &apos;&amp;oldpassword=654321&apos;,
+    dataType: &quot;text&quot;,
+    async:false,
+    success:function(data, status) {
+        if(status == &quot;success&quot;) {
+            var data = eval(&apos;(&apos; + data + &apos;)&apos;);
+            if(data.state == 1 &amp;&amp; ($(&quot;#newpassword&quot;).val()) === ($(&quot;#newpasswordverify&quot;).val())) {
+                alert(&quot;更改成功&quot;);
+                window.location.href = &quot;../home/login.html&quot;;
+            } else {
+                alert(&quot;更改失败，请重新更改&quot;);
+            }
+        } else {
+            alert(&quot;更改失败，请重新更改&quot;);
+        }
+    }
+    });
+</code></pre><p>}<br><br></p>
+<p>//表单提交函数 整个表单提交的有效性检查和数据提交</p>
+<pre><code>function submitUserPassword() {
+
+if(($(&quot;#newpasswordverify&quot;).val()) == &quot;&quot; || ($(&quot;#newpassword&quot;).val()) == &quot;&quot; || ($(&quot;#oldpassword&quot;).val()) == &quot;&quot;) {
+
+    alert(&quot;请输入密码&quot;);
+}else if(($(&quot;#newpassword&quot;).val()) !== ($(&quot;#newpasswordverify&quot;).val())){
+    alert(&quot;请输入正确的密码&quot;);
+}else{
+    submit_formdata($(&quot;#newpasswordverify&quot;).val());
+}
+</code></pre><p>}<br><br><br>&emsp;&emsp;还有一个登陆弹窗的问题，只需要在需要点击登录的页面最下方引入登录界面的登陆div，并设置好样式加隐藏，需要登陆的时候用js让其显示即可，一般有两个div一个为灰色背景一个为登陆弹窗。（<strong>但是登陆弹窗中有一个滑动检测按钮，在之前的js中调用可行，但是引入到主界面时，再调用就没反应了，还未解决！”这里是因为函数不能被调用，直接在弹窗js中引出滑块函数即可解决！”</strong>）<br><br>&emsp;&emsp;另外登陆弹窗主界面显示之后，要点击周围任意地方登陆弹窗即可隐藏效果。代码如下：<br></p>
+<pre><code>function loginFadeout(e) {
+var drag = $(&quot;#login_pc&quot;),
+    dragel = $(&quot;#login_pc&quot;)[0],
+    target = e.target;
+if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
+    $(&quot;#login_mask&quot;).fadeOut(100);
+    $(&quot;#login_pc&quot;).fadeOut(300);
+}
+
+};//主要问题是可以点击周围但是不能点击弹窗内容部分。
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/03/24/ 一周总结之二导航固定条-登录滑块/" title="一周总结之二导航固定条-登录滑块" itemprop="url">一周总结之二导航固定条-登录滑块</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Lmuy" target="_blank" itemprop="author">Lmuy</a>
+		
+  <p class="article-time">
+    <time datetime="2017-03-24T07:00:01.000Z" itemprop="datePublished"> 发表于 2017-03-24</time>
     
   </p>
 </header>
@@ -532,100 +626,6 @@ $.ajax({
 
     $(&apos;#drag&apos;).drag();
 };
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/03/14/ 一周总结之一修改密码-登录弹窗/" title="" itemprop="url"></a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Lmuy" target="_blank" itemprop="author">Lmuy</a>
-		
-  <p class="article-time">
-    <time datetime="2017-03-14T00:54:29.706Z" itemprop="datePublished"> 发表于 2017-03-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>&emsp;&emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。<br><br>&emsp;&emsp;首先是修改密码问题：<br>&emsp;&emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）<br><br>&emsp;&emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交，在html页面传送数据给js页然后再提交，提交的时候也需要判定），代码如下：<br><br><br></p>
-<p>function submit_formdata(password) {</p>
-<pre><code>$.ajax({
-    type: &apos;post&apos;,
-    url: g_ServerAPI + &apos;User&apos;,
-    data: &apos;cmd=update&amp;password=&apos; + password + &apos;&amp;oldpassword=654321&apos;,
-    dataType: &quot;text&quot;,
-    async:false,
-    success:function(data, status) {
-        if(status == &quot;success&quot;) {
-            var data = eval(&apos;(&apos; + data + &apos;)&apos;);
-            if(data.state == 1 &amp;&amp; ($(&quot;#newpassword&quot;).val()) === ($(&quot;#newpasswordverify&quot;).val())) {
-                alert(&quot;更改成功&quot;);
-                window.location.href = &quot;../home/login.html&quot;;
-            } else {
-                alert(&quot;更改失败，请重新更改&quot;);
-            }
-        } else {
-            alert(&quot;更改失败，请重新更改&quot;);
-        }
-    }
-    });
-</code></pre><p>}<br><br></p>
-<p>//表单提交函数 整个表单提交的有效性检查和数据提交</p>
-<pre><code>function submitUserPassword() {
-
-if(($(&quot;#newpasswordverify&quot;).val()) == &quot;&quot; || ($(&quot;#newpassword&quot;).val()) == &quot;&quot; || ($(&quot;#oldpassword&quot;).val()) == &quot;&quot;) {
-
-    alert(&quot;请输入密码&quot;);
-}else if(($(&quot;#newpassword&quot;).val()) !== ($(&quot;#newpasswordverify&quot;).val())){
-    alert(&quot;请输入正确的密码&quot;);
-}else{
-    submit_formdata($(&quot;#newpasswordverify&quot;).val());
-}
-</code></pre><p>}<br><br><br>&emsp;&emsp;还有一个登陆弹窗的问题，只需要在需要点击登录的页面最下方引入登录界面的登陆div，并设置好样式加隐藏，需要登陆的时候用js让其显示即可，一般有两个div一个为灰色背景一个为登陆弹窗。（<strong>但是登陆弹窗中有一个滑动检测按钮，在之前的js中调用可行，但是引入到主界面时，再调用就没反应了，还未解决！”这里是因为函数不能被调用，直接在弹窗js中引出滑块函数即可解决！”</strong>）<br><br>&emsp;&emsp;另外登陆弹窗主界面显示之后，要点击周围任意地方登陆弹窗即可隐藏效果。代码如下：<br></p>
-<pre><code>function loginFadeout(e) {
-var drag = $(&quot;#login_pc&quot;),
-    dragel = $(&quot;#login_pc&quot;)[0],
-    target = e.target;
-if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
-    $(&quot;#login_mask&quot;).fadeOut(100);
-    $(&quot;#login_pc&quot;).fadeOut(300);
-}
-
-};//主要问题是可以点击周围但是不能点击弹窗内容部分。
 </code></pre>
         
         

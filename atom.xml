@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-12T02:51:08.607Z</updated>
+  <updated>2017-05-09T13:26:40.841Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>一周总结四上传头像</title>
     <link href="http://yoursite.com/2017/04/12/%20%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93%E5%9B%9B%E4%B8%8A%E4%BC%A0%E5%A4%B4%E5%83%8F/"/>
     <id>http://yoursite.com/2017/04/12/ 一周总结四上传头像/</id>
-    <published>2017-04-12T02:37:11.026Z</published>
-    <updated>2017-04-12T02:51:08.607Z</updated>
+    <published>2017-04-12T07:00:01.000Z</published>
+    <updated>2017-05-09T13:26:40.841Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;上传头像部分之前没做过，现在看到老师写的很好，样式也很美观留下来学习一下，代码如下：</p>
 <pre><code>//选择头像
@@ -163,11 +163,11 @@ $(&amp;quot;#input&amp;quot;)
   </entry>
   
   <entry>
-    <title></title>
+    <title>一周总结三分页</title>
     <link href="http://yoursite.com/2017/03/29/%20%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93%E4%B8%89%E5%88%86%E9%A1%B5/"/>
     <id>http://yoursite.com/2017/03/29/ 一周总结三分页/</id>
-    <published>2017-03-29T06:57:31.195Z</published>
-    <updated>2017-03-29T07:06:56.296Z</updated>
+    <published>2017-03-29T07:00:01.000Z</published>
+    <updated>2017-05-09T13:25:57.875Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：</p>
 <pre><code>//分页
@@ -326,11 +326,74 @@ $.ajax({
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2017/03/20/%20%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93%E4%B9%8B%E4%BA%8C%E5%AF%BC%E8%88%AA%E5%9B%BA%E5%AE%9A%E6%9D%A1-%E7%99%BB%E5%BD%95%E6%BB%91%E5%9D%97/"/>
-    <id>http://yoursite.com/2017/03/20/ 一周总结之二导航固定条-登录滑块/</id>
-    <published>2017-03-20T07:43:44.014Z</published>
-    <updated>2017-03-24T08:30:16.120Z</updated>
+    <title>一周总结之一修改密码-登录弹窗</title>
+    <link href="http://yoursite.com/2017/03/29/%20%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93%E4%B9%8B%E4%B8%80%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81-%E7%99%BB%E5%BD%95%E5%BC%B9%E7%AA%97/"/>
+    <id>http://yoursite.com/2017/03/29/ 一周总结之一修改密码-登录弹窗/</id>
+    <published>2017-03-29T07:00:01.000Z</published>
+    <updated>2017-05-09T13:28:26.481Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。<br><br>&emsp;&emsp;首先是修改密码问题：<br>&emsp;&emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）<br><br>&emsp;&emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交，在html页面传送数据给js页然后再提交，提交的时候也需要判定），代码如下：<br><br><br></p>
+<p>function submit_formdata(password) {</p>
+<pre><code>$.ajax({
+    type: &apos;post&apos;,
+    url: g_ServerAPI + &apos;User&apos;,
+    data: &apos;cmd=update&amp;password=&apos; + password + &apos;&amp;oldpassword=654321&apos;,
+    dataType: &quot;text&quot;,
+    async:false,
+    success:function(data, status) {
+        if(status == &quot;success&quot;) {
+            var data = eval(&apos;(&apos; + data + &apos;)&apos;);
+            if(data.state == 1 &amp;&amp; ($(&quot;#newpassword&quot;).val()) === ($(&quot;#newpasswordverify&quot;).val())) {
+                alert(&quot;更改成功&quot;);
+                window.location.href = &quot;../home/login.html&quot;;
+            } else {
+                alert(&quot;更改失败，请重新更改&quot;);
+            }
+        } else {
+            alert(&quot;更改失败，请重新更改&quot;);
+        }
+    }
+    });
+</code></pre><p>}<br><br></p>
+<p>//表单提交函数 整个表单提交的有效性检查和数据提交</p>
+<pre><code>function submitUserPassword() {
+
+if(($(&quot;#newpasswordverify&quot;).val()) == &quot;&quot; || ($(&quot;#newpassword&quot;).val()) == &quot;&quot; || ($(&quot;#oldpassword&quot;).val()) == &quot;&quot;) {
+
+    alert(&quot;请输入密码&quot;);
+}else if(($(&quot;#newpassword&quot;).val()) !== ($(&quot;#newpasswordverify&quot;).val())){
+    alert(&quot;请输入正确的密码&quot;);
+}else{
+    submit_formdata($(&quot;#newpasswordverify&quot;).val());
+}
+</code></pre><p>}<br><br><br>&emsp;&emsp;还有一个登陆弹窗的问题，只需要在需要点击登录的页面最下方引入登录界面的登陆div，并设置好样式加隐藏，需要登陆的时候用js让其显示即可，一般有两个div一个为灰色背景一个为登陆弹窗。（<strong>但是登陆弹窗中有一个滑动检测按钮，在之前的js中调用可行，但是引入到主界面时，再调用就没反应了，还未解决！”这里是因为函数不能被调用，直接在弹窗js中引出滑块函数即可解决！”</strong>）<br><br>&emsp;&emsp;另外登陆弹窗主界面显示之后，要点击周围任意地方登陆弹窗即可隐藏效果。代码如下：<br></p>
+<pre><code>function loginFadeout(e) {
+var drag = $(&quot;#login_pc&quot;),
+    dragel = $(&quot;#login_pc&quot;)[0],
+    target = e.target;
+if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
+    $(&quot;#login_mask&quot;).fadeOut(100);
+    $(&quot;#login_pc&quot;).fadeOut(300);
+}
+
+};//主要问题是可以点击周围但是不能点击弹窗内容部分。
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。&lt;br&gt;&lt;br&gt;&amp;emsp;&amp;emsp;首先是修改密码问题：&lt;br&gt;&amp;emsp;&amp;emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一周总结之二导航固定条-登录滑块</title>
+    <link href="http://yoursite.com/2017/03/24/%20%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93%E4%B9%8B%E4%BA%8C%E5%AF%BC%E8%88%AA%E5%9B%BA%E5%AE%9A%E6%9D%A1-%E7%99%BB%E5%BD%95%E6%BB%91%E5%9D%97/"/>
+    <id>http://yoursite.com/2017/03/24/ 一周总结之二导航固定条-登录滑块/</id>
+    <published>2017-03-24T07:00:01.000Z</published>
+    <updated>2017-05-09T13:27:23.552Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;首先是有关上方导航条固定的，代码如下：</p>
 <pre><code>$(function () {
@@ -415,69 +478,6 @@ $.ajax({
 &lt;pre&gt;&lt;code&gt;$(function () {
     $(window).scroll(function(){
         var scrollTop = $(document).scrol
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2017/03/14/%20%E4%B8%80%E5%91%A8%E6%80%BB%E7%BB%93%E4%B9%8B%E4%B8%80%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81-%E7%99%BB%E5%BD%95%E5%BC%B9%E7%AA%97/"/>
-    <id>http://yoursite.com/2017/03/14/ 一周总结之一修改密码-登录弹窗/</id>
-    <published>2017-03-14T00:54:29.706Z</published>
-    <updated>2017-03-29T06:55:47.004Z</updated>
-    
-    <content type="html"><![CDATA[<p>&emsp;&emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。<br><br>&emsp;&emsp;首先是修改密码问题：<br>&emsp;&emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是否有这个值（图片）<br><br>&emsp;&emsp;(2)就是思路问题了，首先是要获取密码,然后判断新旧密码，最后在提交新密码（提交新密码的时候要涉及到表单提交，在html页面传送数据给js页然后再提交，提交的时候也需要判定），代码如下：<br><br><br></p>
-<p>function submit_formdata(password) {</p>
-<pre><code>$.ajax({
-    type: &apos;post&apos;,
-    url: g_ServerAPI + &apos;User&apos;,
-    data: &apos;cmd=update&amp;password=&apos; + password + &apos;&amp;oldpassword=654321&apos;,
-    dataType: &quot;text&quot;,
-    async:false,
-    success:function(data, status) {
-        if(status == &quot;success&quot;) {
-            var data = eval(&apos;(&apos; + data + &apos;)&apos;);
-            if(data.state == 1 &amp;&amp; ($(&quot;#newpassword&quot;).val()) === ($(&quot;#newpasswordverify&quot;).val())) {
-                alert(&quot;更改成功&quot;);
-                window.location.href = &quot;../home/login.html&quot;;
-            } else {
-                alert(&quot;更改失败，请重新更改&quot;);
-            }
-        } else {
-            alert(&quot;更改失败，请重新更改&quot;);
-        }
-    }
-    });
-</code></pre><p>}<br><br></p>
-<p>//表单提交函数 整个表单提交的有效性检查和数据提交</p>
-<pre><code>function submitUserPassword() {
-
-if(($(&quot;#newpasswordverify&quot;).val()) == &quot;&quot; || ($(&quot;#newpassword&quot;).val()) == &quot;&quot; || ($(&quot;#oldpassword&quot;).val()) == &quot;&quot;) {
-
-    alert(&quot;请输入密码&quot;);
-}else if(($(&quot;#newpassword&quot;).val()) !== ($(&quot;#newpasswordverify&quot;).val())){
-    alert(&quot;请输入正确的密码&quot;);
-}else{
-    submit_formdata($(&quot;#newpasswordverify&quot;).val());
-}
-</code></pre><p>}<br><br><br>&emsp;&emsp;还有一个登陆弹窗的问题，只需要在需要点击登录的页面最下方引入登录界面的登陆div，并设置好样式加隐藏，需要登陆的时候用js让其显示即可，一般有两个div一个为灰色背景一个为登陆弹窗。（<strong>但是登陆弹窗中有一个滑动检测按钮，在之前的js中调用可行，但是引入到主界面时，再调用就没反应了，还未解决！”这里是因为函数不能被调用，直接在弹窗js中引出滑块函数即可解决！”</strong>）<br><br>&emsp;&emsp;另外登陆弹窗主界面显示之后，要点击周围任意地方登陆弹窗即可隐藏效果。代码如下：<br></p>
-<pre><code>function loginFadeout(e) {
-var drag = $(&quot;#login_pc&quot;),
-    dragel = $(&quot;#login_pc&quot;)[0],
-    target = e.target;
-if (dragel !== target &amp;&amp; !$.contains(dragel, target)) {
-    $(&quot;#login_mask&quot;).fadeOut(100);
-    $(&quot;#login_pc&quot;).fadeOut(300);
-}
-
-};//主要问题是可以点击周围但是不能点击弹窗内容部分。
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;emsp;&amp;emsp;由于基础不好所以日常碰到的一些自己觉得难以解决的问题就做下记录。&lt;br&gt;&lt;br&gt;&amp;emsp;&amp;emsp;首先是修改密码问题：&lt;br&gt;&amp;emsp;&amp;emsp;(1)首先碰到的问题就是后台接口没有找好，这个很好解决。接下来就是要获取的值，要看看接口里面是
     
     </summary>
     
