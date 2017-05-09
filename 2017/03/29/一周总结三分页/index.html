@@ -11,31 +11,25 @@
     
 
     
-    <meta name="description" content="&amp;emsp;&amp;emsp;首先是有关上方导航条固定的，代码如下：
-$(function () {
-    $(window).scroll(function(){
-        var scrollTop = $(document).scrollTop();
-        if(scrollTop &amp;gt;= 145){
-            $(&amp;quot;.menu_nav&amp;quot;).">
+    <meta name="description" content="&amp;emsp;&amp;emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：
+//分页
+function display_personal_center_list_box(){
+    var collectArticlePageCount=1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lmuy' blog">
-<meta property="og:url" content="http://yoursite.com/2017/03/20/一周总结之二（导航固定条-登录滑块）/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/03/29/一周总结三分页/index.html">
 <meta property="og:site_name" content="Lmuy' blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;首先是有关上方导航条固定的，代码如下：
-$(function () {
-    $(window).scroll(function(){
-        var scrollTop = $(document).scrollTop();
-        if(scrollTop &amp;gt;= 145){
-            $(&amp;quot;.menu_nav&amp;quot;).">
-<meta property="og:updated_time" content="2017-03-24T08:30:16.120Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：
+//分页
+function display_personal_center_list_box(){
+    var collectArticlePageCount=1">
+<meta property="og:updated_time" content="2017-03-29T07:06:56.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lmuy' blog">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;首先是有关上方导航条固定的，代码如下：
-$(function () {
-    $(window).scroll(function(){
-        var scrollTop = $(document).scrollTop();
-        if(scrollTop &amp;gt;= 145){
-            $(&amp;quot;.menu_nav&amp;quot;).">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：
+//分页
+function display_personal_center_list_box(){
+    var collectArticlePageCount=1">
 
     
     <link rel="alternative" href="/atom.xml" title="Lmuy&#39; blog" type="application/atom+xml">
@@ -95,14 +89,14 @@ $(function () {
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/03/20/一周总结之二（导航固定条-登录滑块）/" title="" itemprop="url"></a>
+      <a href="/2017/03/29/一周总结三分页/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Lmuy" target="_blank" itemprop="author">Lmuy</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-20T07:43:44.014Z" itemprop="datePublished"> 发表于 2017-03-20</time>
+    <time datetime="2017-03-29T06:57:31.195Z" itemprop="datePublished"> 发表于 2017-03-29</time>
     
   </p>
 </header>
@@ -115,81 +109,149 @@ $(function () {
 		
 		</div>
 		
-		<p>&emsp;&emsp;首先是有关上方导航条固定的，代码如下：</p>
-<pre><code>$(function () {
-    $(window).scroll(function(){
-        var scrollTop = $(document).scrollTop();
-        if(scrollTop &gt;= 145){
-            $(&quot;.menu_nav&quot;).addClass(&quot;new_menu&quot;);
+		<p>&emsp;&emsp;首先是分页问题：分页需要调用两次ajax第一次获取动态数据，然后换页的时候第二次用ajax获取数据，需要注意的是记得要调用../resource/js/bootstrap-paginator.js，代码如下：</p>
+<pre><code>//分页
+function display_personal_center_list_box(){
+    var collectArticlePageCount=1;
+    var collectArticleCurrentPage=1;
+$.ajax({  
+    type:&apos;get&apos;,
+    url: g_ServerAPI + &apos;Log&apos;, 
+    data:&apos;cmd=get_collect&amp;type=1&amp;userid=&apos; + userID + &apos;&amp;pageno=0&amp;pagesize=3&apos;,    
+    dataType: &quot;text&quot;, 
+    async: false,
+    success: function (ret) {     
+        $(&quot;#right_collection_article_all&quot;).empty();
+        var articleData = eval(&quot;(&quot; + ret + &quot;)&quot;);
+        var articles = articleData.Articles;
+        var articleList = &quot;&quot;;
+        if(articles.length==0){
+            articleList = &apos;&lt;div style=&quot;margin-top:250px;text-align:center;&quot;&gt;您还没有收藏的文章快去收藏吧！&lt;/div&gt;&apos;;
+            $(&quot;#right_collection_article_all&quot;).append(articleList);
+            $(&quot;#right_collection_course&quot;).append(articleList);
         }else{
-            $(&quot;.menu_nav&quot;).removeClass(&quot;new_menu&quot;);
-        }
-    });
-});
-</code></pre><p>只需要知道距离窗口上方的位置，算出滑动距离即可。<br><br>&emsp;&emsp;接下来是登录弹窗的滑块部分，代码如下：</p>
-<pre><code>(function($){
-        $.fn.drag = function(options){
-            var x, drag = this, isMove = false, defaults = {
+            for(var i=0;i&lt;articles.length;i++){
+            articleID = articles[i].ID;
+            articleTitle = articles[i].Title;
+            articleAdddate = articles[i].AddDate;
+            articleContent = articles[i].Content;
+
+            //下面这种写法不能有空行
+            articleList = &apos;&lt;div onmouseout=&quot;deleteHide(&apos;+i+&apos;)&quot; onmouseover=&quot;deleteShow(&apos;+i+&apos;)&quot; class=&quot;person_center_main_right_collection_article_content&quot; id=&quot;right_collection_article_content&apos;+i+&apos;&quot;&gt;\
+                &lt;img class=&quot;person_center_main_right_collection_article_content_picture&quot; src=&quot;../images/enjoy_list_pic01.png&quot;&gt;\
+                &lt;div class=&quot;person_center_main_right_collection_article_content_article&quot;&gt;\
+                    &lt;a href=&quot;../viewer/index.html?articleID=&apos;+articleID+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_article_title&quot;&gt;&apos; + articleTitle + &apos;&lt;/a&gt;\
+                    &lt;p class=&quot;person_center_main_right_collection_article_content_article_content&quot;&gt;&apos; + articleContent + &apos;&lt;/p&gt;\
+                    &lt;p class=&quot;person_center_main_right_collection_article_content_article_collection&quot;&gt;&apos; + articleAdddate + &apos;&lt;/p&gt;\
+                &lt;/div&gt;\
+                &lt;div style=&quot;display:none;&quot; id=&quot;right_collection_article_content_delete&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_delete&quot; &gt;\
+                    &lt;img onclick=&quot;deleteArticle(&apos;+i+&apos;,&apos;+articleID+&apos;)&quot; src=&quot;../images/person_icon_delete.png&quot; alt=&quot;删除&quot; /&gt;\
+                &lt;/div&gt;\
+            &lt;/div&gt;\
+            &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;&apos;;
+
+
+            if(i&lt;articles.length-1){
+                articleList += &apos;&lt;div id=&quot;right_collection_line&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_line&quot;&gt;&lt;hr/&gt;&lt;/div&gt;&apos;;
+            }else{
+                articleList += &apos;&lt;div&gt;&lt;/div&gt;&apos;;
             };
-            var options = $.extend(defaults, options);
-            //添加背景，文字，滑块
-            var html = &apos;&lt;div class=&quot;drag_bg&quot;&gt;&lt;/div&gt;&apos;+
-                        &apos;&lt;div class=&quot;drag_text&quot; onselectstart=&quot;return false;&quot; unselectable=&quot;on&quot;&gt;拖动滑块验证&lt;/div&gt;&apos;+
-                        &apos;&lt;div class=&quot;handler handler_bg&quot;&gt;&lt;/div&gt;&apos;;
-            $(&quot;#drag&quot;).html(html);
 
-            var handler = drag.find(&apos;.handler&apos;);
-            var drag_bg = drag.find(&apos;.drag_bg&apos;);
-            var text = drag.find(&apos;.drag_text&apos;);
-            var maxWidth = drag.width() - handler.width();  //能滑动的最大间距
 
-            //鼠标按下时候的x轴的位置
-            handler.mousedown(function(e){
-                isMove = true;
-                x = e.pageX - parseInt(handler.css(&apos;left&apos;), 10);
-            });
 
-            //鼠标指针在上下文移动时，移动距离大于0小于最大间距，滑块x轴位置等于鼠标移动距离
-            $(document).mousemove(function(e){
-                var _x = e.pageX - x;
-                if(isMove){
-                    if(_x &gt; 0 &amp;&amp; _x &lt;= 100){
-                        handler.css({&apos;left&apos;: _x});
-                        drag_bg.css({&apos;width&apos;: _x});
-                    }else if(_x&gt;100 &amp;&amp; _x &lt;=maxWidth){
-                        handler.css({&apos;left&apos;: _x});
-                        drag_bg.css({&apos;width&apos;: _x});
-                        text.css(&quot;color&quot;,&quot;transparent&quot;);
-                    }else if(_x &gt; maxWidth){  //鼠标指针移动距离达到最大时清空事件
-                        dragOk();
-                        check_yanzheng=true;
-                    }
-                }
-            }).mouseup(function(e){
-                isMove = false;
-                var _x = e.pageX - x;
-                if(_x &lt; maxWidth){ //鼠标松开时，如果没有达到最大距离位置，滑块就返回初始位置
-                    handler.css({&apos;left&apos;: 0});
-                    drag_bg.css({&apos;width&apos;: 0});
-                    text.css(&quot;color&quot;,&quot;#999999&quot;);
-                }
-            });
+            $(&quot;#right_collection_article_all&quot;).append(articleList);
 
-            //清空事件
-            function dragOk(){
-                handler.removeClass(&apos;handler_bg&apos;).addClass(&apos;handler_ok_bg&apos;);
-                text.text(&apos;验证通过&apos;);
-                text.css(&apos;color&apos;,&apos;white&apos;);
-                drag.css({&apos;color&apos;: &apos;#fff&apos;});
-                handler.unbind(&apos;mousedown&apos;);
-                $(document).unbind(&apos;mousemove&apos;);
-                $(document).unbind(&apos;mouseup&apos;);
-            }
         };
-    })(jQuery);  
 
-    $(&apos;#drag&apos;).drag();
-};
+        collectArticlePageCount = Math.ceil(articleData.total/3); 
+
+        var options = {
+            bootstrapMajorVersion: 2, //版本
+            currentPage: collectArticleCurrentPage, //当前页数
+            totalPages: collectArticlePageCount, //总页数
+            itemTexts: function(type, page, current) {
+                switch(type) {
+                    case &quot;first&quot;:
+                        return &quot;&lt;&quot;;//&amp;laquo;
+                    case &quot;prev&quot;:
+                        return &quot;&lt;&quot;;//&amp;lt;
+                    case &quot;next&quot;:
+                        return &quot;&gt;&quot;;//&amp;gt;
+                    case &quot;last&quot;:
+                        return &quot;&gt;&quot;;//&amp;raquo;
+                    case &quot;page&quot;:
+                        return page;
+                }
+        }, 
+        onPageClicked: function(event, originalEvent, type, page){
+            $.ajax({  
+                type:&apos;get&apos;,
+                url: g_ServerAPI + &apos;Log&apos;, 
+                data:&apos;cmd=get_collect&amp;type=1&amp;userid=&apos; + userID + &apos;&amp;pageno=&apos;+ (page-1) +&apos;&amp;pagesize=3&apos;,    
+                dataType: &quot;text&quot;, 
+                async: false,
+                success: function (ret) {     
+                    $(&quot;#right_collection_article_all&quot;).empty();
+                    var articleData = eval(&quot;(&quot; + ret + &quot;)&quot;);
+                    var articles = articleData.Articles;
+                    var articleList = &quot;&quot;;
+                    if(articles.length==0){
+                        articleList = &apos;&lt;div style=&quot;margin-top:250px;text-align:center;&quot;&gt;您还没有收藏的文章快去收藏吧！&lt;/div&gt;&apos;;
+                        $(&quot;#right_collection_article_all&quot;).append(articleList);
+                        $(&quot;#right_collection_course&quot;).append(articleList);
+                    }else{
+                        for(var i=0;i&lt;articles.length;i++){
+                        articleID = articles[i].ID;
+                        articleTitle = articles[i].Title;
+                        articleAdddate = articles[i].AddDate;
+                        articleContent = articles[i].Content;
+
+                        //下面这种写法不能有空行
+                        articleList = &apos;&lt;div onmouseout=&quot;deleteHide(&apos;+i+&apos;)&quot; onmouseover=&quot;deleteShow(&apos;+i+&apos;)&quot; class=&quot;person_center_main_right_collection_article_content&quot; id=&quot;right_collection_article_content&apos;+i+&apos;&quot;&gt;\
+                            &lt;img class=&quot;person_center_main_right_collection_article_content_picture&quot; src=&quot;../images/enjoy_list_pic01.png&quot;&gt;\
+                            &lt;div class=&quot;person_center_main_right_collection_article_content_article&quot;&gt;\
+                                &lt;a href=&quot;../viewer/index.html?articleID=&apos;+articleID+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_article_title&quot;&gt;&apos; + articleTitle + &apos;&lt;/a&gt;\
+                                &lt;p class=&quot;person_center_main_right_collection_article_content_article_content&quot;&gt;&apos; + articleContent + &apos;&lt;/p&gt;\
+                                &lt;p class=&quot;person_center_main_right_collection_article_content_article_collection&quot;&gt;&apos; + articleAdddate + &apos;&lt;/p&gt;\
+                            &lt;/div&gt;\
+                            &lt;div style=&quot;display:none;&quot; id=&quot;right_collection_article_content_delete&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_article_content_delete&quot; &gt;\
+                                &lt;img onclick=&quot;deleteArticle(&apos;+i+&apos;,&apos;+articleID+&apos;)&quot; src=&quot;../images/person_icon_delete.png&quot; alt=&quot;删除&quot; /&gt;\
+                            &lt;/div&gt;\
+                        &lt;/div&gt;\
+                        &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;&apos;;
+
+
+                        if(i&lt;articles.length-1){
+                            articleList += &apos;&lt;div id=&quot;right_collection_line&apos;+i+&apos;&quot; class=&quot;person_center_main_right_collection_line&quot;&gt;&lt;hr/&gt;&lt;/div&gt;&apos;;
+                        }else{
+                            articleList += &apos;&lt;div&gt;&lt;/div&gt;&apos;;
+                        };
+
+
+
+                        $(&quot;#right_collection_article_all&quot;).append(articleList);
+
+                        }
+                        }
+                    }
+                        });
+                    },
+                    };
+
+                        $(&apos;#right_collection_article_all_page&apos;).bootstrapPaginator(options);
+
+
+                    }
+
+    },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+        console.log(XMLHttpRequest.status);
+        console.log(XMLHttpRequest.readyState);
+        console.log(textStatus);
+}  
+});
+}
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -202,7 +264,7 @@ $(function () {
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/03/20/一周总结之二（导航固定条-登录滑块）/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/03/29/一周总结三分页/" data-title="Lmuy&#39; blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -216,7 +278,7 @@ $(function () {
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/03/29/一周总结三（分页）/" title="">
+ <a href="/2017/04/12/一周总结四上传头像/" title="">
   <strong>上一篇：</strong><br/>
   <span>
   (no title)</span>
@@ -225,7 +287,7 @@ $(function () {
 
 
 <div class="next">
-<a href="/2017/03/14/一周总结之一(修改密码-登录弹窗)/"  title="">
+<a href="/2017/03/20/一周总结之二导航固定条-登录滑块/"  title="">
  <strong>下一篇：</strong><br/> 
  <span>(no title)
 </span>
